@@ -26,7 +26,7 @@ public class Controlador {
         	reiniciarColores(vecinos);
         	
         }
-        if(!ganaste()) {
+        if(ganaste()) {
         	tablero.ganaste();
         	System.out.println("aaa");
 
