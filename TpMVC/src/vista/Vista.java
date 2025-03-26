@@ -1,13 +1,14 @@
 package vista;
 
 import controlador.Controlador;
-import modelo.Observador;
 import modelo.Tablero;
+import observador.Observador;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.Naming;
 
 public class Vista implements Observador {
 
@@ -85,13 +86,20 @@ public class Vista implements Observador {
         
        
     }
-    
-    public void actualizar(boolean b) {
-    	JPanel laminaGanaste=new JPanel();
+ 
+	@Override
+	public void actualizarGano() {
+		// TODO Auto-generated method stub
+		
+		JPanel laminaGanaste=new JPanel();
+		laminaGanaste.setLayout(new BorderLayout());
     	JLabel labelGanaste=new JLabel("ganate");
-    	laminaGanaste.add(labelGanaste);
+    	laminaGanaste.add(labelGanaste,BorderLayout.CENTER);
     	frame.remove(panelTablero);
     	frame.add(laminaGanaste);
         frame.setVisible(true);
-    }
+		
+	}
+
+	
 }
