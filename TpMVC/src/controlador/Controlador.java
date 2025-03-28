@@ -17,9 +17,9 @@ public class Controlador {
     }
 
     // Método que maneja el evento de clic sobre una casilla
-    public void manejarClick(int fila, int columna) {
+    public void manejarClick(int fila, int columna, int limite) {
         // Cambiar el color de la casilla (por ejemplo, al color rojo)
-        int nuevoColor = tablero.numeroRandom(); 
+        int nuevoColor = tablero.numeroRandom(limite); 
         tablero.cambiarColor(fila, columna, nuevoColor); // Actualizar el modelo
         if(tablero.ColoresIguales(fila, columna)) {
         	ArrayList<int[]> vecinos=tablero.obtenerPosicionesVecinas(fila, columna);
@@ -32,6 +32,11 @@ public class Controlador {
 
         }
     }
+
+	
+	
+	
+	
     
 }
 

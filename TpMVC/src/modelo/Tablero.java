@@ -61,12 +61,12 @@ public class Tablero {
     	notificar("gano");
     }
     
-    public int numeroRandom () {
+    public int numeroRandom (int limite) {
     	// Crear una instancia de Random
     	Random random = new Random();
     	
     	// Generar un número aleatorio entre 1 y 6
-    	int randomNumber = random.nextInt(5) + 1;
+    	int randomNumber = random.nextInt(limite) + 1;
     	
     	return randomNumber;
     }  
@@ -136,6 +136,8 @@ public class Tablero {
     	}
     	return ret;
     }
+	
+	
 
     
  }
