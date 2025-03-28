@@ -23,7 +23,7 @@ public class Controlador {
         tablero.cambiarColor(fila, columna, nuevoColor); // Actualizar el modelo
         if(tablero.ColoresIguales(fila, columna)) {
         	ArrayList<int[]> vecinos=tablero.obtenerPosicionesVecinas(fila, columna);
-        	tablero.reiniciarColores(vecinos);
+        	tablero.reiniciarColores(vecinos, fila, columna);
         	
         }
         if(tablero.ganaste()) {

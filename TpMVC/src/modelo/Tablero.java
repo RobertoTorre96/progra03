@@ -114,10 +114,11 @@ public class Tablero {
    	    return false;
    }
     
-    public  void  reiniciarColores(ArrayList<int[]> modificar) {
+    public  void  reiniciarColores(ArrayList<int[]> modificar, int fila, int columna ) {
     	for (int[] c: modificar ) {
     		
     		cambiarColor(c[0],c[1],0);
+    		cambiarColor(fila,columna,0);
     		
     	}
     }
@@ -133,7 +134,7 @@ public class Tablero {
         	}
     		
     	}
-    	return !ret;
+    	return ret;
     }
 
     
