@@ -87,17 +87,17 @@ public class Vista implements Observador {
         JButton btnMedio = new JButton("Medio");
         JButton btnDificil = new JButton("Difícil");
         btnFacil.setPreferredSize(new Dimension (20,20));
-
-        btnFacil.addActionListener(e -> CrearVistaDeTablero( tablero, controlador, 7));
-        btnMedio.addActionListener(e -> CrearVistaDeTablero( tablero, controlador,5 ));
-        btnDificil.addActionListener(e -> CrearVistaDeTablero( tablero, controlador, 4));
-
+        
         panel.add(btnFacil);
         panel.add(btnMedio);
         panel.add(btnDificil);
 
         frame.add(panel);
         frame.setVisible(true);
+        
+        btnFacil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( tablero, controlador, 7);});
+        btnMedio.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( tablero, controlador,5 ); });
+        btnDificil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( tablero, controlador, 4); });
     }
     
 
