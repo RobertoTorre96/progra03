@@ -189,16 +189,35 @@ public class Vista implements Observador {
     }
  
 	@Override
-	public void actualizarGano() {
-		// TODO Auto-generated method stub
-		
-		JPanel laminaGanaste=new JPanel();
+	public void actualizarGano() {		
+		/*JPanel laminaGanaste=new JPanel();
 		laminaGanaste.setLayout(new BorderLayout());
     	JLabel labelGanaste=new JLabel("Ganaste");
     	laminaGanaste.add(labelGanaste,BorderLayout.CENTER);
     	frame.remove(panelTablero);
     	frame.add(laminaGanaste);
-        frame.setVisible(true);
+        frame.setVisible(true);*/
+		
+		 // Crear un nuevo panel para mostrar la imagen de "Ganaste"
+	    JPanel laminaGanaste = new JPanel();
+	    laminaGanaste.setLayout(new BorderLayout());
+
+	    // Cargar la imagen desde resources (asegúrate de que la imagen esté en src/resources/)
+	    ImageIcon iconoGanaste = new ImageIcon(getClass().getResource("/img/ganaste.jpg")); // Ajusta la ruta según tu proyecto
+	    JLabel labelImagen = new JLabel(iconoGanaste);
+	    
+	    // Agregar la imagen al panel
+	    laminaGanaste.add(labelImagen, BorderLayout.CENTER);
+
+	    // Opcional: Agregar un texto adicional debajo de la imagen
+	    JLabel labelTexto = new JLabel("¡Ganaste!", SwingConstants.CENTER);
+	    laminaGanaste.add(labelTexto, BorderLayout.SOUTH);
+
+	    // Reemplazar el panel actual por el nuevo
+	    frame.remove(panelTablero);
+	    frame.add(laminaGanaste);
+	    frame.revalidate(); // Para refrescar el contenido del JFrame
+	    frame.repaint(); // Para actualizar la vista
 	
 	}
 	
