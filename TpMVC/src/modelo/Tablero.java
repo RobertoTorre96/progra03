@@ -10,10 +10,14 @@ public class Tablero {
 
     private int[][] tablero; // Matriz 5x5 para representar los colores
     private List<Observador> observadores; // Lista de observadores
+    private int cantidadDeCasillasDelTablero;
 
-    public Tablero() {
-        this.tablero = new int[5][5]; // Inicializamos un tablero 5x5 en 0 (sin color)
+    public Tablero(int cantidadDeCasillasDelTablero) {
+    	this.cantidadDeCasillasDelTablero =cantidadDeCasillasDelTablero;
+    	this.tablero = new int[this.cantidadDeCasillasDelTablero]
+    						  [this.cantidadDeCasillasDelTablero]; // Inicializamos un tablero del tamaño indicado por parametros en el constructor
         this.observadores = new ArrayList<>();
+     
     }
 
     // Método para agregar un observador
@@ -50,7 +54,7 @@ public class Tablero {
     public boolean esPosicionValida(int f, int c) {
     	
     	
-    	if (f>=0 && f<5 && c<5 && c>=0) {
+    	if (f>=0 && f<this.cantidadDeCasillasDelTablero && c<this.cantidadDeCasillasDelTablero && c>=0) {
     		return true;
     	}
     	return false;
@@ -135,6 +139,10 @@ public class Tablero {
     		
     	}
     	return ret;
+    }
+    
+    public int darCantidadDeCasillasDelTablero() {
+    	return this.cantidadDeCasillasDelTablero;
     }
 	
 	

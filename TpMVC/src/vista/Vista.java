@@ -46,22 +46,21 @@ public class Vista implements Observador {
     }*/
     
     
-    /*===========METODO NUEVO PARA QUE PRIMERO ME PIDA ELEGIR DIFICULTAD========*/
+    /*===========METODO NUEVO PARA QUE se cree el tablero con la dificultad seleccionada========*/
     
-    	private void CrearVistaDeTablero(Tablero tablero, Controlador controlador, int limite) {
-        this.tablero = tablero;
-        this.controlador = controlador;
-        tablero.agregarObservador(this); // Nos registramos como observador del modelo  
+    	private void CrearVistaDeTablero(int limite, int tamanioDelTablero) {
+         // Nos registramos como observador del modelo  
          
         // Inicializar la interfaz gráfica
         frame = new JFrame("Juego de Tablero");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
-        panelTablero = new JPanel(new GridLayout(5, 5)); // Tablero de 5x5
+        frame.setLocationRelativeTo(null); 
+        panelTablero = new JPanel(new GridLayout(tamanioDelTablero, tamanioDelTablero)); // Tablero de 5x5
 
         // Crear las casillas del tablero (botones o paneles)
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < tamanioDelTablero; i++) {
+            for (int j = 0; j < tamanioDelTablero; j++) {
                 JButton casilla = new JButton();
                 casilla.setPreferredSize(new Dimension(60, 60));
 
@@ -77,10 +76,11 @@ public class Vista implements Observador {
     }
     
     //=======metodo para que el usuario elija la dificultad===========
-    public Vista(Tablero tablero, Controlador controlador) {
+    public void seleccionarDificultad( int tamanioDelTablero) {
         frame = new JFrame("Seleccionar Dificultad");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
+        frame.setLocationRelativeTo(null); 
         JPanel panel = new JPanel(new GridLayout(3, 1));
 
         JButton btnFacil = new JButton("Fácil");
@@ -95,10 +95,40 @@ public class Vista implements Observador {
         frame.add(panel);
         frame.setVisible(true);
         
-        btnFacil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( tablero, controlador, 7);});
-        btnMedio.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( tablero, controlador,5 ); });
-        btnDificil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( tablero, controlador, 4); });
+        btnFacil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( 7, tamanioDelTablero);});
+        btnMedio.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( 5, tamanioDelTablero); });
+        btnDificil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( 4, tamanioDelTablero); });
     }
+    
+    
+    //=========metodo para que el usuario elija el tamaño del tablero 
+    
+    public Vista(Controlador controlador) {
+    	this.controlador = controlador;
+        frame = new JFrame("Seleccionar Tamaño del tablero");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLocationRelativeTo(null); 
+        JPanel panel = new JPanel(new GridLayout(3, 1));
+
+        JButton btn5x5 = new JButton("Tablero de 5x5");
+        JButton btn7x7 = new JButton("Tablero de 7x7");
+        JButton btn9x9 = new JButton("Tablero de 9x9");
+        
+        panel.add(btn5x5);
+        panel.add(btn7x7);
+        panel.add(btn9x9);
+
+        frame.add(panel);
+        frame.setVisible(true);
+        
+        btn5x5.addActionListener(e -> {frame.dispose();seleccionarDificultad(5);controlador.crearTablero(5); controlador.agregarObservador(this);});
+        btn7x7.addActionListener(e -> {frame.dispose();seleccionarDificultad(7);controlador.crearTablero(7); controlador.agregarObservador(this); });
+        btn9x9.addActionListener(e -> {frame.dispose();seleccionarDificultad(9);controlador.crearTablero(9);controlador.agregarObservador(this); });
+    }
+    
+    
+    
     
 
     // Método que crea el ActionListener para cada casilla
@@ -119,9 +149,9 @@ public class Vista implements Observador {
     // Método que actualiza la vista cuando el modelo cambia
     @Override
     public void actualizar(int[][] tablero) {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                JButton casilla = (JButton) panelTablero.getComponent(i * 5 + j);
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero.length; j++) {
+                JButton casilla = (JButton) panelTablero.getComponent(i * tablero[0].length + j);
                 int color = tablero[i][j];
 
                 // Cambiar el color del botón basado en el valor de la matriz
