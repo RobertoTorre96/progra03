@@ -152,26 +152,36 @@ public class Vista implements Observador {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero.length; j++) {
                 JButton casilla = (JButton) panelTablero.getComponent(i * tablero[0].length + j);
-                int color = tablero[i][j];
-
-                // Cambiar el color del botón basado en el valor de la matriz
-                if (color == 0) {
-                    casilla.setBackground(Color.WHITE);
-                } else if (color == 1) {
-                    casilla.setBackground(Color.RED);
-                } else if (color == 2) {
-                    casilla.setBackground(Color.GREEN);
-                } else if (color == 3) {
-                    casilla.setBackground(Color.BLUE);
-                } else if (color == 4) {
-                    casilla.setBackground(Color.YELLOW);
-                }else if (color == 5){
-                    casilla.setBackground(Color.MAGENTA);
-                }else if (color == 6){
-                	casilla.setBackground(Color.ORANGE);
-                }else{
-                	casilla.setBackground(Color.PINK);
+                int color = tablero[i][j];     
+                
+                Color colorAsignado;
+                switch (color) {
+                    case 1:
+                        colorAsignado = Color.RED;
+                        break;
+                    case 2:
+                        colorAsignado = Color.GREEN;
+                        break;
+                    case 3:
+                        colorAsignado = Color.BLUE;
+                        break;
+                    case 4:
+                        colorAsignado = Color.YELLOW;
+                        break;
+                    case 5:
+                        colorAsignado = Color.MAGENTA;
+                        break;
+                    case 6:
+                        colorAsignado = Color.ORANGE;
+                        break;
+                    case 7:
+                        colorAsignado = Color.PINK;
+                        break;
+                    default:
+                        colorAsignado = Color.WHITE; 
                 }
+
+                casilla.setBackground(colorAsignado);
             }
         }
         
