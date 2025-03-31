@@ -24,12 +24,16 @@ public class Controlador {
 
     // Método que maneja el evento de clic sobre una casilla
     public void manejarClick(int fila, int columna, int limite) {
+    	 tablero.aumentarClicsTotales();
+         tablero.aumentarClicsSeguidos();
+         tablero.mantenerMejorRacha();
         // Cambiar el color de la casilla (por ejemplo, al color rojo)
         int nuevoColor = this.tablero.numeroRandom(limite); 
         tablero.cambiarColor(fila, columna, nuevoColor); // Actualizar el modelo
         if(tablero.ColoresIguales(fila, columna)) {
         	ArrayList<int[]> vecinos=tablero.obtenerPosicionesVecinas(fila, columna);
         	tablero.reiniciarColores(vecinos, fila, columna);
+        	tablero.volverContadorClicsSeguidosACero();
         	
         }
         if(tablero.ganaste()) {
@@ -41,6 +45,15 @@ public class Controlador {
 
 	public void agregarObservador(Vista vista) {
 		this.tablero.agregarObservador(vista);	
+	}
+
+	public String darTotalClicsAlMomento() {
+		
+		return Integer.toString(tablero.mostrarCantTotalDeClics());
+	}
+
+	public String darMejorRacha() {
+		return Integer.toString(tablero.mostrarMejorRacha());
 	}
 
 	

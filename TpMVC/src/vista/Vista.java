@@ -16,6 +16,7 @@ public class Vista implements Observador {
     private Controlador controlador; // El controlador
     private JFrame frame;
     private JPanel panelTablero;
+    private JLabel labelIndicaQueHacer, labelTotalDeClicsAlMomento, labelMejorRacha; 
     /*=====METODO ORIGINAL=========
     public Vista(Tablero tablero, Controlador controlador) {
         this.tablero = tablero;
@@ -48,21 +49,28 @@ public class Vista implements Observador {
     
     /*===========METODO NUEVO PARA QUE se cree el tablero con la dificultad seleccionada========*/
     
-    	private void CrearVistaDeTablero(int limite, int tamanioDelTablero) {
-         // Nos registramos como observador del modelo  
-         
+    	private void CrearVistaDeTablero(int limite, int tamanioDelTablero) {         
         // Inicializar la interfaz gráfica
         frame = new JFrame("Juego de Tablero");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null); 
         panelTablero = new JPanel(new GridLayout(tamanioDelTablero, tamanioDelTablero)); // Tablero de 5x5
-
+        
+        labelIndicaQueHacer = new JLabel("Haz clic en una casilla");
+        labelIndicaQueHacer.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        labelTotalDeClicsAlMomento = new JLabel("Total de clics: " + controlador.darTotalClicsAlMomento());
+        labelMejorRacha = new JLabel ("Mejor racha al momento: " + controlador.darMejorRacha());
+        
+        JPanel panelLabels = new JPanel(new GridLayout(1, 2)); // Un panel con 1 fila y 2 columnas
+        panelLabels.add(labelTotalDeClicsAlMomento);
+        panelLabels.add(labelMejorRacha);
+        
         // Crear las casillas del tablero (botones o paneles)
         for (int i = 0; i < tamanioDelTablero; i++) {
             for (int j = 0; j < tamanioDelTablero; j++) {
                 JButton casilla = new JButton();
-                casilla.setPreferredSize(new Dimension(60, 60));
 
                 // Agregar el ActionListener para manejar los clics en la casilla
                 casilla.addActionListener(CrearEventoClick(i, j, limite));
@@ -70,8 +78,12 @@ public class Vista implements Observador {
                 panelTablero.add(casilla);
             }
         }
+        
+        
 
         frame.add(panelTablero);
+        frame.add(labelIndicaQueHacer, BorderLayout.NORTH);
+        frame.add(panelLabels, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
     
@@ -140,6 +152,8 @@ public class Vista implements Observador {
 			public void actionPerformed(ActionEvent e) {
 				// Llamar al controlador cuando se hace clic en una casilla
                 controlador.manejarClick(fila, columna, limite);
+                labelTotalDeClicsAlMomento.setText("Total de clics: " + controlador.darTotalClicsAlMomento());
+                labelMejorRacha.setText("Mejor racha al momento: " + controlador.darMejorRacha());
 				
 			}
          };

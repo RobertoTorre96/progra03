@@ -10,7 +10,8 @@ public class Tablero {
 
     private int[][] tablero; // Matriz 5x5 para representar los colores
     private List<Observador> observadores; // Lista de observadores
-    private int cantidadDeCasillasDelTablero;
+    private int cantidadDeCasillasDelTablero, cantidadDeClicsTotal,cantidadDeClics, mejorRacha;
+	
 
     public Tablero(int cantidadDeCasillasDelTablero) {
     	this.cantidadDeCasillasDelTablero =cantidadDeCasillasDelTablero;
@@ -144,8 +145,32 @@ public class Tablero {
     public int darCantidadDeCasillasDelTablero() {
     	return this.cantidadDeCasillasDelTablero;
     }
-	
-	
-
     
+    
+    public void aumentarClicsTotales() {
+    	++cantidadDeClicsTotal;
+    }
+    
+    public void aumentarClicsSeguidos() {
+    	++cantidadDeClics;
+    	
+    }
+    
+    public void mantenerMejorRacha() {
+    	if (cantidadDeClics > mejorRacha) {
+    		mejorRacha = cantidadDeClics;
+    	}
+    }
+    
+    public void volverContadorClicsSeguidosACero() {
+    	cantidadDeClics = 0;
+    }
+    
+    public int mostrarCantTotalDeClics() {
+    	return cantidadDeClicsTotal;
  }
+    public int mostrarMejorRacha() {
+    	return mejorRacha;
+    }
+    
+}
