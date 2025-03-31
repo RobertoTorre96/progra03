@@ -89,54 +89,121 @@ public class Vista implements Observador {
     
     //=======metodo para que el usuario elija la dificultad===========
     public void seleccionarDificultad( int tamanioDelTablero) {
-        frame = new JFrame("Seleccionar Dificultad");
+       	frame = new JFrame("Seleccionar Dificultad");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.setLocationRelativeTo(null); 
-        JPanel panel = new JPanel(new GridLayout(3, 1));
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
 
-        JButton btnFacil = new JButton("Fácil");
-        JButton btnMedio = new JButton("Medio");
-        JButton btnDificil = new JButton("Difícil");
-        btnFacil.setPreferredSize(new Dimension (20,20));
-        
+        // Cargar imagen de fondo
+        ImageIcon icon = new ImageIcon("src/img/fondoDeJuego.jpg");
+        Image img = icon.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+        JLabel background = new JLabel(new ImageIcon(img));
+        background.setBounds(0, 0, 500, 500);
+
+        // Crear panel para botones
+        JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
+        panel.setOpaque(false);
+        panel.setBounds(150, 150, 200, 180);
+
+        JButton btnFacil = crearBoton("Fácil", new Color(144, 238, 144), Color.BLACK);
+        JButton btnMedio = crearBoton("Medio", new Color(255, 215, 0), Color.BLACK);
+        JButton btnDificil = crearBoton("Difícil", new Color(255, 69, 0), Color.WHITE);
+
         panel.add(btnFacil);
         panel.add(btnMedio);
         panel.add(btnDificil);
 
-        frame.add(panel);
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(500, 500));
+        layeredPane.add(background, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
+
+        frame.setContentPane(layeredPane);
         frame.setVisible(true);
-        
-        btnFacil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( 7, tamanioDelTablero);});
-        btnMedio.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( 5, tamanioDelTablero); });
-        btnDificil.addActionListener(e -> {frame.dispose();CrearVistaDeTablero( 4, tamanioDelTablero); });
-    }
-    
+
+        btnFacil.addActionListener(e -> {
+            frame.dispose();
+            CrearVistaDeTablero(7, tamanioDelTablero);
+        });
+        btnMedio.addActionListener(e -> {
+            frame.dispose();
+            CrearVistaDeTablero(5, tamanioDelTablero);
+        });
+        btnDificil.addActionListener(e -> {
+            frame.dispose();
+            CrearVistaDeTablero(4, tamanioDelTablero);
+        });
+    }    
     
     //=========metodo para que el usuario elija el tamaño del tablero 
-    
+        
     public Vista(Controlador controlador) {
-    	this.controlador = controlador;
-        frame = new JFrame("Seleccionar Tamaño del tablero");
+        this.controlador = controlador;
+        
+        frame = new JFrame("Seleccionar Tamaño del Tablero");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.setLocationRelativeTo(null); 
-        JPanel panel = new JPanel(new GridLayout(3, 1));
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        
+        // Cargar la imagen de fondo
+        JLabel background = new JLabel(new ImageIcon("src/img/fondoDeJuego.jpg"));
+        background.setLayout(new GridBagLayout());
+        frame.setContentPane(background);
+        
+        // Configurar el panel con los botones centrados
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 1, 10, 10)); // Espaciado entre botones
+        panel.setOpaque(false); // Para que sea transparente y se vea la imagen de fondo
+        panel.setBounds(150, 150, 200, 180);
+        
+        
+        JButton btn5x5 = crearBoton("Tablero de 5x5", new Color(0, 153, 255), Color.WHITE);
+        JButton btn7x7 = crearBoton("Tablero de 7x7", new Color(0, 204, 102), Color.BLACK);
+        JButton btn9x9 = crearBoton("Tablero de 9x9", new Color(255, 102, 102), Color.WHITE);
 
-        JButton btn5x5 = new JButton("Tablero de 5x5");
-        JButton btn7x7 = new JButton("Tablero de 7x7");
-        JButton btn9x9 = new JButton("Tablero de 9x9");
         
         panel.add(btn5x5);
         panel.add(btn7x7);
-        panel.add(btn9x9);
-
-        frame.add(panel);
+        panel.add(btn9x9);    
+        
+        
+        // Añadir el panel con los botones en el centro
+        background.add(panel);
+        
         frame.setVisible(true);
         
-        btn5x5.addActionListener(e -> {frame.dispose();seleccionarDificultad(5);controlador.crearTablero(5); controlador.agregarObservador(this);});
-        btn7x7.addActionListener(e -> {frame.dispose();seleccionarDificultad(7);controlador.crearTablero(7); controlador.agregarObservador(this); });
-        btn9x9.addActionListener(e -> {frame.dispose();seleccionarDificultad(9);controlador.crearTablero(9);controlador.agregarObservador(this); });
+        // Configurar acciones de los botones
+        btn5x5.addActionListener(e -> {
+            frame.dispose();
+            seleccionarDificultad(5);
+            controlador.crearTablero(5);
+            controlador.agregarObservador(this);
+        });
+        
+        btn7x7.addActionListener(e -> {
+            frame.dispose();
+            seleccionarDificultad(7);
+            controlador.crearTablero(7);
+            controlador.agregarObservador(this);
+        });
+        
+        btn9x9.addActionListener(e -> {
+            frame.dispose();
+            seleccionarDificultad(9);
+            controlador.crearTablero(9);
+            controlador.agregarObservador(this);
+        });
+    }
+    
+    private JButton crearBoton(String texto, Color colorFondo, Color colorTexto) {
+        JButton boton = new JButton(texto);
+        boton.setPreferredSize(new Dimension(180, 60)); // Tamaño más grande
+        boton.setBackground(colorFondo); // Color de fondo
+        boton.setForeground(colorTexto); // Color del texto
+        boton.setFont(new Font("Arial", Font.BOLD, 16)); // Fuente más grande
+        boton.setFocusPainted(false); // Quita el borde de selección al hacer clic
+        boton.setBorder(BorderFactory.createRaisedBevelBorder()); // Borde 3D
+        return boton;
     }
     
     
