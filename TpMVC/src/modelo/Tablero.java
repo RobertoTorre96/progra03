@@ -27,24 +27,31 @@ public class Tablero {
     }
 
     // Método para notificar a todos los observadores
-    public void notificar(String estado) {
+    public void notificar() {
         for (Observador observador : observadores) {
         	
-        	if (estado.equals("gano")) {
+        	if (ganaste()) {
         		observador.actualizarGano();
         	}
-        	else if (estado.equals("actualizar")) {
+        	else  {
+        		
         		observador.actualizar(tablero); // Notificamos el cambio
         	}
         }	
     }
+    public void NotificarGano() {
+    	notificar();
+    }
+    
    
  
 
     // Método para cambiar el color de una casilla en la posición (fila, columna)
     public void cambiarColor(int fila, int columna, int color) {
         tablero[fila][columna] = color;
-        notificar("actualizar"); // Notificamos a la vista que el modelo ha cambiado
+        notificar(); // Notificamos a la vista que el modelo ha cambiado
+        
+        
     }
 
     // Método para obtener el tablero
@@ -62,10 +69,7 @@ public class Tablero {
     	
     	
     }
-    public void notificarGano() {
-    	notificar("gano");
-    }
-    
+ 
     public int numeroRandom (int limite) {
     	// Crear una instancia de Random
     	Random random = new Random();
@@ -97,7 +101,7 @@ public class Tablero {
         return posicionesVecinas;
     }
     
-    public boolean ColoresIguales(int f,int c) {
+    public boolean coloresIguales(int f,int c) {
     	
 
     	ArrayList<int[]> vecinos=obtenerPosicionesVecinas(f, c);

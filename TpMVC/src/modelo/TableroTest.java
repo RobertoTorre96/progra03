@@ -73,7 +73,7 @@ public class TableroTest {
 		tablero5X5.cambiarColor(4, 0, 1); // casilla 4,0 rojo
 		tablero5X5.cambiarColor(4, 1, 1); // casilla 4,1 rojo
 		
-		assertTrue(tablero5X5.ColoresIguales(4, 1));
+		assertTrue(tablero5X5.coloresIguales(4, 1));
 		
 	}
 	
@@ -82,7 +82,7 @@ public class TableroTest {
 		tablero5X5.cambiarColor(4, 0, 1); // casilla 4,0 rojo
 		tablero5X5.cambiarColor(4, 1, 2); // casilla 4,1 verde
 		
-		assertFalse(tablero5X5.ColoresIguales(4, 1));
+		assertFalse(tablero5X5.coloresIguales(4, 1));
 		
 	}
 	

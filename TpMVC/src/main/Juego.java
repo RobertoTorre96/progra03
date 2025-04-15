@@ -1,6 +1,5 @@
 package main;
 import controlador.Controlador;
-import modelo.Tablero;
 import vista.Vista;
 
 public class Juego {
