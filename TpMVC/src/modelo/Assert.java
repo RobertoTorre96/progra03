@@ -15,7 +15,6 @@ public class Assert {
 		assertEquals(esperado.size(), obtenido.size());
 		
 		for(int i=0; i<esperado.size(); ++i) {
-			// { [2, 2], [2, 4], [1, 3] [3, 3] }
 			assertArrayEquals(esperado.get(i), obtenido.get(i));
 				
         }
