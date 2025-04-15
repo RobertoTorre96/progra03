@@ -70,8 +70,8 @@ public class TableroTest {
 	
 	@Test
 	public void comprobarCoincidenciaColoresVecinosTest() {
-		tablero5X5.cambiarColor(4, 0, 1); // casilla 4,0 rojo
-		tablero5X5.cambiarColor(4, 1, 1); // casilla 4,1 rojo
+		tablero5X5.cambiarColor(4, 0, 1); 
+		tablero5X5.cambiarColor(4, 1, 1); 
 		
 		assertTrue(tablero5X5.coloresIguales(4, 1));
 		
@@ -79,8 +79,8 @@ public class TableroTest {
 	
 	@Test
 	public void comprobarColoresVecinosDesigualesTest() {
-		tablero5X5.cambiarColor(4, 0, 1); // casilla 4,0 rojo
-		tablero5X5.cambiarColor(4, 1, 2); // casilla 4,1 verde
+		tablero5X5.cambiarColor(4, 0, 1); 
+		tablero5X5.cambiarColor(4, 1, 2); 
 		
 		assertFalse(tablero5X5.coloresIguales(4, 1));
 		
