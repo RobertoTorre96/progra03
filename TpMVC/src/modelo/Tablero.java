@@ -8,25 +8,25 @@ import observador.Observador;
 
 public class Tablero {
 
-    private int[][] tablero; // Matriz 5x5 para representar los colores
-    private List<Observador> observadores; // Lista de observadores
+    private int[][] tablero; 
+    private List<Observador> observadores; 
     private int cantidadDeCasillasDelTablero, cantidadDeClicsTotal,cantidadDeClics, mejorRacha;
 	
 
     public Tablero(int cantidadDeCasillasDelTablero) {
     	this.cantidadDeCasillasDelTablero =cantidadDeCasillasDelTablero;
     	this.tablero = new int[this.cantidadDeCasillasDelTablero]
-    						  [this.cantidadDeCasillasDelTablero]; // Inicializamos un tablero del tamaño indicado por parametros en el constructor
+    						  [this.cantidadDeCasillasDelTablero]; 
         this.observadores = new ArrayList<>();
      
     }
 
-    // Método para agregar un observador
+   
     public void agregarObservador(Observador observador) {
         observadores.add(observador);
     }
 
-    // Método para notificar a todos los observadores
+    
     public void notificar() {
         for (Observador observador : observadores) {
         	
@@ -35,7 +35,7 @@ public class Tablero {
         	}
         	else  {
         		
-        		observador.actualizar(tablero); // Notificamos el cambio
+        		observador.actualizar(tablero);
         	}
         }	
     }
@@ -46,15 +46,15 @@ public class Tablero {
    
  
 
-    // Método para cambiar el color de una casilla en la posición (fila, columna)
+    
     public void cambiarColor(int fila, int columna, int color) {
         tablero[fila][columna] = color;
-        notificar(); // Notificamos a la vista que el modelo ha cambiado
+        notificar(); 
         
         
     }
 
-    // Método para obtener el tablero
+   
     public int[][] getTablero() {
         return tablero;
     }
@@ -71,33 +71,32 @@ public class Tablero {
     }
  
     public int numeroRandom (int limite) {
-    	// Crear una instancia de Random
+    	
     	Random random = new Random();
     	
-    	// Generar un número aleatorio entre 1 y 6
+    	
     	int randomNumber = random.nextInt(limite) + 1;
     	
     	return randomNumber;
     }  
     
     public ArrayList<int[]> obtenerPosicionesVecinas(int fila, int col) {
-        ArrayList<int[]> posicionesVecinas = new ArrayList<>();  // Usamos un ArrayList para almacenar las posiciones vecinas
-
-        // Verificar cada vecino y agregarlo al ArrayList si es válido
+        ArrayList<int[]> posicionesVecinas = new ArrayList<>();  
+	 
         if (esPosicionValida(fila, col - 1)) { 
-            posicionesVecinas.add(new int[] {fila, col - 1});  // Vecino a la izquierda
+            posicionesVecinas.add(new int[] {fila, col - 1}); 
         }
         if (esPosicionValida(fila, col + 1)) { 
-            posicionesVecinas.add(new int[] {fila, col + 1});  // Vecino a la derecha
+            posicionesVecinas.add(new int[] {fila, col + 1});  
         }
         if (esPosicionValida(fila - 1, col)) { 
-            posicionesVecinas.add(new int[] {fila - 1, col});  // Vecino arriba
+            posicionesVecinas.add(new int[] {fila - 1, col});  
         }
         if (esPosicionValida(fila + 1, col)) { 
-            posicionesVecinas.add(new int[] {fila + 1, col});  // Vecino abajo
+            posicionesVecinas.add(new int[] {fila + 1, col}); 
         }
 
-        // Devolvemos el ArrayList de posiciones vecinas válidas
+       
         return posicionesVecinas;
     }
     
