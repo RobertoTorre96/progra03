@@ -107,12 +107,9 @@ public class Tablero {
    	 
     	int [][] tab=getTablero();
     	int centro=tab[f][c];
-   	    System.out.println("Color en la casilla central: " + centro);
 
    	    for( int[] casilla:vecinos) {
    	    	if (tab[casilla[0]][casilla[1]] == centro) {
-   	    		System.out.println(tab[casilla[0]][casilla[1]]);
-
    	    		return true;
    			 
    	    	}
