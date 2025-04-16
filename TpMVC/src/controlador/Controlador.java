@@ -7,7 +7,7 @@ import vista.Vista;
 
 public class Controlador {
 
-    private Tablero tablero; // El modelo
+    private Tablero tablero; 
 
     public Controlador() {
     	
@@ -18,20 +18,20 @@ public class Controlador {
     	this.tablero = tablero;
     }
 
-    // Método que maneja el evento de clic sobre una casilla
+    
     public void manejarClick(int fila, int columna, int cantColores) {
     	 tablero.aumentarClicsTotales();
          tablero.aumentarClicsSeguidos();
          tablero.mantenerMejorRacha();
-        // Cambiar el color de la casilla (por ejemplo, al color rojo)
-        int nuevoColor = this.tablero.numeroRandom(cantColores); 
-        tablero.cambiarColor(fila, columna, nuevoColor); // Actualizar el modelo
         
-        //reiniciar colores
+        int nuevoColor = this.tablero.numeroRandom(cantColores); 
+        tablero.cambiarColor(fila, columna, nuevoColor); 
+        
+       
         if(tablero.coloresIguales(fila, columna)) {
         	limpiarTablero(fila,columna);
         	
-        }//gano
+        }
         else if(tablero.ganaste()) {
         	tablero.NotificarGano();;
 
